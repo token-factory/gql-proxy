@@ -1,0 +1,39 @@
+language: node_js
+node_js:
+  - 'node'
+
+branches:
+  only:
+    - master
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT}
+
+services:
+  - 'docker'
+
+before_install:
+  - 'make prereqs-ibmcloud'
+  - 'make login-ibmcloud'
+
+# first execute the test suite.
+# after the test execution is done and didn't
+# fail, build the images (if this step fails
+# the whole Travis build is considered a failure).
+before_script:
+  - 'make build-app'
+
+after_success:
+  - 'make prune'
+  - 'make docker-image'
+  - 'make push-image'
+  - echo 'completed build process successfully'
+
+# TODO: Not sure do we still need webhook for token-factory repos
+# notifications:
+#   webhooks:
+#     urls:
+#       - http://playground-cluster-dev.us-east.containers.appdomain.cloud:31514/ ## trigger playground-deployer build process
+#     on_success: always
+

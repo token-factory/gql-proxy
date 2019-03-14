@@ -1,0 +1,39 @@
+{
+  "name": "token-factory-gql-proxy",
+  "version": "1.0.0",
+  "description": "token factory graphQL entry-point",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "BASE_URI=http://localhost:9000 LOG_LEVEL=trace node ./build/server.js",
+    "start:integration": "BASE_URI=http://token-factory-dev.us-east.containers.appdomain.cloud LOG_LEVEL=trace node ./build/server.js",
+    "start:production": "node server.js",
+    "test": "echo \"I don't have tests!\"",
+    "lint": "eslint src/server.js",
+    "build-server": "babel --copy-files -d ./build ./src -s",
+    "build": "npm run clean && npm run build-server",
+    "build:production": "npm run build",
+    "clean": "rm -rf build && mkdir -p build/test-output"
+  },
+  "author": "Token-Factory-Squad",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-link-context": "^1.0.9",
+    "apollo-link-http": "^1.5.5",
+    "apollo-server": "^2.1.0",
+    "apollo-server-express": "^2.1.0",
+    "babel": "^6.23.0",
+    "express": "^4.16.4",
+    "graphql": "^0.13.2",
+    "graphql-tools": "^3.1.1",
+    "lodash": "^4.17.11",
+    "log4js": "^3.0.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^5.7.0",
+    "eslint-config-prettier": "^3.1.0"
+  }
+}

@@ -1,0 +1,3 @@
+IMAGE ?= blockchain_innovation/token-factory-gql-proxy
+IMAGE_REPO ?= registry.ng.bluemix.net
+IMAGE_TAG ?= $(COMMIT)
